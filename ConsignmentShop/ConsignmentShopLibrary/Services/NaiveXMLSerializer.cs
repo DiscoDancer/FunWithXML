@@ -39,6 +39,7 @@ namespace ConsignmentShopLibrary.Services
                 var isSimpleSystemType = propertyInfo.PropertyType.FullName.StartsWith("System") 
                                          && !propertyInfo.PropertyType.FullName.Contains("Collections");
 
+                // Array, List, ...
                 // beware: string is collection too.
                 var isCollection = typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType);
 
@@ -72,12 +73,14 @@ namespace ConsignmentShopLibrary.Services
 
                     foreach (var item in valCollection)
                     {
-                        result += $"{tabs + "\t"}<{name}>";
+                        var itemName = item.GetType().Name;
+
+                        result += $"{tabs + "\t"}<{itemName}>";
                         result += Environment.NewLine;
 
                         result += $"{SerializeNestedProperties(item, tabs + "\t" + "\t")}";
 
-                        result += $"{tabs + "\t"}</{name}>";
+                        result += $"{tabs + "\t"}</{itemName}>";
                         result += Environment.NewLine;
                     }
 
