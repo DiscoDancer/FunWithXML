@@ -17,9 +17,9 @@ namespace Tests
             // assign
             var clothes = new Clothes
             {
-                Title = "Pro ASP NET Core",
-                Description = "Very interesting book",
-                Price = 14,
+                Title = "Baseball Cap",
+                Description = "A very nice one",
+                Price = 11,
                 Sold = true,
                 PaymentDistributed = false,
                 Owner = new Vendor

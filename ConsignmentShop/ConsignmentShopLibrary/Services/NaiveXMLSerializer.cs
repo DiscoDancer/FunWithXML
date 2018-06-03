@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace ConsignmentShopLibrary.Services
 {
@@ -26,7 +27,7 @@ namespace ConsignmentShopLibrary.Services
             return result;
         }
 
-        private static string SerializeNestedProperties(object target)
+        private static string SerializeNestedProperties(object target, string tabs = "\t")
         {
             var result = string.Empty;
 
@@ -34,12 +35,17 @@ namespace ConsignmentShopLibrary.Services
 
             foreach (var propertyInfo in props)
             {
-                var isSystemType = propertyInfo.PropertyType.FullName.StartsWith("System");
+                // bool, int, float, double, string
+                var isSimpleSystemType = propertyInfo.PropertyType.FullName.StartsWith("System") 
+                                         && !propertyInfo.PropertyType.FullName.Contains("Collections");
+
+                // beware: string is collection too.
+                var isCollection = typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType);
 
                 var name = propertyInfo.Name;
                 var val = propertyInfo.GetValue(target, null);
 
-                if (isSystemType)
+                if (isSimpleSystemType)
                 {
                     var valToString = val.ToString();
 
@@ -54,17 +60,38 @@ namespace ConsignmentShopLibrary.Services
                         valToString = valToString.ToLower();
                     }
 
-                    result += $"   <{name}>{valToString}</{name}>";
+                    result += $"{tabs}<{name}>{valToString}</{name}>";
+                    result += Environment.NewLine;
+                }
+                else if (isCollection)
+                {
+                    var valCollection = val as IEnumerable;
+
+                    result += $"{tabs + "\t"}<{name}>";
+                    result += Environment.NewLine;
+
+                    foreach (var item in valCollection)
+                    {
+                        result += $"{tabs}<{name}>";
+                        result += Environment.NewLine;
+
+                        result += $"{SerializeNestedProperties(item, tabs + "\t" + "\t")}";
+
+                        result += $"{tabs}</{name}>";
+                        result += Environment.NewLine;
+                    }
+
+                    result += $"{tabs + "\t"}</{name}>";
                     result += Environment.NewLine;
                 }
                 else
                 {
-                    result += $"   <{name}>";
+                    result += $"{tabs}<{name}>";
                     result += Environment.NewLine;
 
-                    result += $"{SerializeNestedProperties(val)}";
+                    result += $"{SerializeNestedProperties(val, tabs + "\t")}";
 
-                    result += $"   </{name}>";
+                    result += $"{tabs}</{name}>";
                     result += Environment.NewLine;
                 }
             }
