@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using ConsignmentShopLibrary;
 using ConsignmentShopLibrary.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,8 +36,6 @@ namespace Tests
             File.WriteAllText(fileName, str);
 
             // assert
-
-
         }
     }
 }

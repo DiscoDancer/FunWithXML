@@ -67,21 +67,21 @@ namespace ConsignmentShopLibrary.Services
                 {
                     var valCollection = val as IEnumerable;
 
-                    result += $"{tabs + "\t"}<{name}>";
+                    result += $"{tabs}<{name}>";
                     result += Environment.NewLine;
 
                     foreach (var item in valCollection)
                     {
-                        result += $"{tabs}<{name}>";
+                        result += $"{tabs + "\t"}<{name}>";
                         result += Environment.NewLine;
 
                         result += $"{SerializeNestedProperties(item, tabs + "\t" + "\t")}";
 
-                        result += $"{tabs}</{name}>";
+                        result += $"{tabs + "\t"}</{name}>";
                         result += Environment.NewLine;
                     }
 
-                    result += $"{tabs + "\t"}</{name}>";
+                    result += $"{tabs}</{name}>";
                     result += Environment.NewLine;
                 }
                 else
