@@ -45,6 +45,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="Services\NaiveXMLSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\StoreService.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="Vendor.cs" />
   </ItemGroup>
