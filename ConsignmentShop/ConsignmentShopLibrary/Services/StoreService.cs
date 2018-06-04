@@ -21,6 +21,8 @@ namespace ConsignmentShopLibrary.Services
             var targetStore = (Store)serializer.Deserialize(reader);
             reader.Close();
 
+            OptimizeVendors(targetStore);
+
             return targetStore;
         }
 
@@ -69,5 +71,18 @@ namespace ConsignmentShopLibrary.Services
                     }
                 }.ToList()
             };
+
+        public static void OptimizeVendors(Store store)
+        {
+            // we need to use the same vendor overall
+            // but after serialization we have many copies
+            foreach (var item in store.Items)
+            {
+                item.Owner = store.Vendors.FirstOrDefault(x =>
+                    x.FirstName == item.Owner.FirstName &&
+                    x.LastName == item.Owner.LastName &&
+                    x.PaymentDue == item.Owner.PaymentDue);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ConsignmentShopLibrary.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,6 +8,20 @@ namespace Tests
     [TestClass]
     public class StoreTest
     {
+        [TestMethod]
+        public void TestVendorOptimization()
+        {
+            // assign
+            var store = StoreService.TestStore;
+
+            // action
+            StoreService.OptimizeVendors(store);
+
+            // assert
+            Assert.AreSame(store.Vendors.First(), store.Items.First().Owner);
+            Assert.AreSame(store.Vendors.First(), store.Items.Last().Owner);
+        }
+
         [TestMethod]
         public void TestStoreSerialization()
         {
