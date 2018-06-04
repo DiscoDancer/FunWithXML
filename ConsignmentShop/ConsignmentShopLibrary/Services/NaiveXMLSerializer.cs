@@ -71,17 +71,31 @@ namespace ConsignmentShopLibrary.Services
                     result += $"{tabs}<{name}>";
                     result += Environment.NewLine;
 
-                    foreach (var item in valCollection)
+                    foreach (var child in valCollection)
                     {
-                        var itemName = item.GetType().Name;
+                        var itemName = child.GetType().Name;
 
-                        result += $"{tabs + "\t"}<{itemName}>";
-                        result += Environment.NewLine;
+                        var isCustomItem = child is Item;
+                        if (isCustomItem)
+                        {
+                            result += $"{tabs + "\t"}<Item xsi:type=\"{itemName}\">";
+                            result += Environment.NewLine;
 
-                        result += $"{SerializeNestedProperties(item, tabs + "\t" + "\t")}";
+                            result += $"{SerializeNestedProperties(child, tabs + "\t" + "\t")}";
 
-                        result += $"{tabs + "\t"}</{itemName}>";
-                        result += Environment.NewLine;
+                            result += $"{tabs + "\t"}</Item>";
+                            result += Environment.NewLine;
+                        }
+                        else
+                        {
+                            result += $"{tabs + "\t"}<{itemName}>";
+                            result += Environment.NewLine;
+
+                            result += $"{SerializeNestedProperties(child, tabs + "\t" + "\t")}";
+
+                            result += $"{tabs + "\t"}</{itemName}>";
+                            result += Environment.NewLine;
+                        }
                     }
 
                     result += $"{tabs}</{name}>";
