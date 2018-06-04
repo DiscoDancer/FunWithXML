@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace ConsignmentShopLibrary
 {
+    [Serializable]
+    [XmlInclude(typeof(Book))]
+    [XmlInclude(typeof(Clothes))]
     public abstract class Item
     {
         public Guid ID { get; set; } = Guid.NewGuid();

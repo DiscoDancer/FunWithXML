@@ -28,8 +28,50 @@ namespace Tests
                         LastName = "LastName",
                         PaymentDue = 11
                     }
+                }.ToList(),
+                Items = new Item[]
+                {
+                    new Clothes
+                    {
+                        Title = "Baseball Cap",
+                        Description = "A very nice one",
+                        Price = 11,
+                        Sold = true,
+                        PaymentDistributed = false,
+                        Owner = new Vendor
+                        {
+                            FirstName = "FirstName",
+                            LastName = "LastName",
+                            PaymentDue = 11
+                        }
+                    },
+                    new Book
+                    {
+                        Title = "Pro ASP NET Core",
+                        Description = "Very interesting book",
+                        Price = 14,
+                        Sold = true,
+                        PaymentDistributed = false,
+                        Owner = new Vendor
+                        {
+                            FirstName = "FirstName",
+                            LastName = "LastName",
+                            PaymentDue = 11
+                        }
+                    }
                 }.ToList()
             };
+
+            // передаем в конструктор тип класса
+            XmlSerializer formatter = new XmlSerializer(typeof(Store));
+
+            // получаем поток, куда будем записывать сериализованный объект
+            using (FileStream fs = new FileStream("perfect_store.xml", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, store);
+            }
+
+            return;
 
             // action
             var str = NaiveXMLSerializer.Serialize(store);

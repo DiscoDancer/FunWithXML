@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsignmentShopLibrary
 {
+    [Serializable]
     public class Clothes: Item
     {
         public override double Commission { get; set; } = 1.5;
