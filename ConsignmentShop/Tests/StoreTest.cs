@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using System.Xml.Serialization;
-using ConsignmentShopLibrary;
+﻿using System.Linq;
 using ConsignmentShopLibrary.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,63 +10,14 @@ namespace Tests
         [TestMethod]
         public void TestStoreSerialization()
         {
-            const string fileName = "store.xml";
-
             // assign
-            var store = new Store
-            {
-                Name = "MyAwesomeStore",
-                Vendors = new[]
-                {
-                    new Vendor
-                    {
-                        FirstName = "FirstName",
-                        LastName = "LastName",
-                        PaymentDue = 11
-                    }
-                }.ToList(),
-                Items = new Item[]
-                {
-                    new Clothes
-                    {
-                        Title = "Baseball Cap",
-                        Description = "A very nice one",
-                        Price = 11,
-                        Sold = true,
-                        PaymentDistributed = false,
-                        Owner = new Vendor
-                        {
-                            FirstName = "FirstName",
-                            LastName = "LastName",
-                            PaymentDue = 11
-                        }
-                    },
-                    new Book
-                    {
-                        Title = "Pro ASP NET Core",
-                        Description = "Very interesting book",
-                        Price = 14,
-                        Sold = true,
-                        PaymentDistributed = false,
-                        Owner = new Vendor
-                        {
-                            FirstName = "FirstName",
-                            LastName = "LastName",
-                            PaymentDue = 11
-                        }
-                    }
-                }.ToList()
-            };
+            var store = StoreService.TestStore;
 
             // action
-            var str = NaiveXMLSerializer.Serialize(store);
-            File.WriteAllText(fileName, str);
+            StoreService.SaveToFile(store);
 
             // assert
-            var serializer = new XmlSerializer(typeof(Store));
-            var reader = new StreamReader(fileName);
-            var targetStore = (Store)serializer.Deserialize(reader);
-            reader.Close();
+            var targetStore = StoreService.ReadFromFile();
 
             Assert.IsNotNull(targetStore);
             Assert.AreEqual(targetStore.Name, store.Name);
