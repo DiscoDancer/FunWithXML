@@ -16,6 +16,8 @@ namespace ConsignmentShopLibrary.Services
 
         public static Store ReadFromFile()
         {
+            if (!File.Exists(FileName)) return null;
+
             var serializer = new XmlSerializer(typeof(Store));
             var reader = new StreamReader(FileName);
             var targetStore = (Store)serializer.Deserialize(reader);

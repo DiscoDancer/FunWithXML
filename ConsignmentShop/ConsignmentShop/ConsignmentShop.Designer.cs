@@ -44,6 +44,7 @@ namespace ConsignmentShop
             this.AddBtn = new System.Windows.Forms.Button();
             this.DelBtn = new System.Windows.Forms.Button();
             this.EditBtn = new System.Windows.Forms.Button();
+            this.buttonSaveToXML = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerText
@@ -52,17 +53,17 @@ namespace ConsignmentShop
             this.headerText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headerText.Location = new System.Drawing.Point(309, 9);
             this.headerText.Name = "headerText";
-            this.headerText.Size = new System.Drawing.Size(347, 29);
+            this.headerText.Size = new System.Drawing.Size(268, 24);
             this.headerText.TabIndex = 0;
             this.headerText.Text = "Комиссиционный магазин";
             // 
             // ItemsListBox
             // 
             this.ItemsListBox.FormattingEnabled = true;
-            this.ItemsListBox.ItemHeight = 25;
+            this.ItemsListBox.ItemHeight = 20;
             this.ItemsListBox.Location = new System.Drawing.Point(38, 140);
             this.ItemsListBox.Name = "ItemsListBox";
-            this.ItemsListBox.Size = new System.Drawing.Size(307, 179);
+            this.ItemsListBox.Size = new System.Drawing.Size(307, 164);
             this.ItemsListBox.TabIndex = 1;
             // 
             // StoreItem
@@ -71,7 +72,7 @@ namespace ConsignmentShop
             this.StoreItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StoreItem.Location = new System.Drawing.Point(33, 112);
             this.StoreItem.Name = "StoreItem";
-            this.StoreItem.Size = new System.Drawing.Size(173, 25);
+            this.StoreItem.Size = new System.Drawing.Size(140, 20);
             this.StoreItem.TabIndex = 2;
             this.StoreItem.Text = "Товары магазина";
             // 
@@ -92,17 +93,17 @@ namespace ConsignmentShop
             this.ShoppingCartListboxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ShoppingCartListboxLabel.Location = new System.Drawing.Point(612, 112);
             this.ShoppingCartListboxLabel.Name = "ShoppingCartListboxLabel";
-            this.ShoppingCartListboxLabel.Size = new System.Drawing.Size(89, 25);
+            this.ShoppingCartListboxLabel.Size = new System.Drawing.Size(72, 20);
             this.ShoppingCartListboxLabel.TabIndex = 5;
             this.ShoppingCartListboxLabel.Text = "Корзина";
             // 
             // ShoppingCartListBox
             // 
             this.ShoppingCartListBox.FormattingEnabled = true;
-            this.ShoppingCartListBox.ItemHeight = 25;
+            this.ShoppingCartListBox.ItemHeight = 20;
             this.ShoppingCartListBox.Location = new System.Drawing.Point(512, 140);
             this.ShoppingCartListBox.Name = "ShoppingCartListBox";
-            this.ShoppingCartListBox.Size = new System.Drawing.Size(298, 179);
+            this.ShoppingCartListBox.Size = new System.Drawing.Size(298, 164);
             this.ShoppingCartListBox.TabIndex = 4;
             // 
             // makePurchase
@@ -121,17 +122,17 @@ namespace ConsignmentShop
             this.vendorListboxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.vendorListboxLabel.Location = new System.Drawing.Point(33, 322);
             this.vendorListboxLabel.Name = "vendorListboxLabel";
-            this.vendorListboxLabel.Size = new System.Drawing.Size(128, 25);
+            this.vendorListboxLabel.Size = new System.Drawing.Size(104, 20);
             this.vendorListboxLabel.TabIndex = 8;
             this.vendorListboxLabel.Text = "Поставщики";
             // 
             // vendorListBox
             // 
             this.vendorListBox.FormattingEnabled = true;
-            this.vendorListBox.ItemHeight = 25;
+            this.vendorListBox.ItemHeight = 20;
             this.vendorListBox.Location = new System.Drawing.Point(38, 350);
             this.vendorListBox.Name = "vendorListBox";
-            this.vendorListBox.Size = new System.Drawing.Size(307, 179);
+            this.vendorListBox.Size = new System.Drawing.Size(307, 164);
             this.vendorListBox.TabIndex = 7;
             // 
             // storeProfitLabel
@@ -140,7 +141,7 @@ namespace ConsignmentShop
             this.storeProfitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.storeProfitLabel.Location = new System.Drawing.Point(449, 421);
             this.storeProfitLabel.Name = "storeProfitLabel";
-            this.storeProfitLabel.Size = new System.Drawing.Size(194, 25);
+            this.storeProfitLabel.Size = new System.Drawing.Size(157, 20);
             this.storeProfitLabel.TabIndex = 9;
             this.storeProfitLabel.Text = "Прибыль магазина:";
             // 
@@ -150,7 +151,7 @@ namespace ConsignmentShop
             this.storeProfitValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.storeProfitValue.Location = new System.Drawing.Point(657, 421);
             this.storeProfitValue.Name = "storeProfitValue";
-            this.storeProfitValue.Size = new System.Drawing.Size(61, 25);
+            this.storeProfitValue.Size = new System.Drawing.Size(49, 20);
             this.storeProfitValue.TabIndex = 10;
             this.storeProfitValue.Text = "0.00₽";
             // 
@@ -184,12 +185,23 @@ namespace ConsignmentShop
             this.EditBtn.UseVisualStyleBackColor = true;
             this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
             // 
+            // buttonSaveToXML
+            // 
+            this.buttonSaveToXML.Location = new System.Drawing.Point(465, 49);
+            this.buttonSaveToXML.Name = "buttonSaveToXML";
+            this.buttonSaveToXML.Size = new System.Drawing.Size(391, 40);
+            this.buttonSaveToXML.TabIndex = 14;
+            this.buttonSaveToXML.Text = "Сохранить магазин в XML";
+            this.buttonSaveToXML.UseVisualStyleBackColor = true;
+            this.buttonSaveToXML.Click += new System.EventHandler(this.buttonSaveToXML_Click);
+            // 
             // ConsignmentShop
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(868, 540);
+            this.Controls.Add(this.buttonSaveToXML);
             this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.DelBtn);
             this.Controls.Add(this.AddBtn);
@@ -229,6 +241,7 @@ namespace ConsignmentShop
         public System.Windows.Forms.Button AddBtn;
         public System.Windows.Forms.Button DelBtn;
         public System.Windows.Forms.Button EditBtn;
+        public System.Windows.Forms.Button buttonSaveToXML;
 
         public EventHandler StoreItem_Click { get;  set; }
         public EventHandler ConsignmentShop_Load { get; set; }
